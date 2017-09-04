@@ -5,5 +5,5 @@ app_name = 'profiles_api'
 
 
 urlpatterns = [
-    url(r'^$', profiles_api.views.HelloApiView.as_view(), name='hello'),
+    url(r'^hello', profiles_api.views.HelloApiView.as_view(), name='hello'),
 ]
