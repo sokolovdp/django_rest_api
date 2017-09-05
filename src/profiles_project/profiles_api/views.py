@@ -4,6 +4,21 @@ from rest_framework.response import Response
 from rest_framework import status
 from profiles_api import serializers
 
+from rest_framework import viewsets
+
+class HelloViewSet(viewsets.ViewSet):
+    def list(self, request):
+        a_viewset = [
+            'Used methods: list, create, reetrive, update, partial_update, delete',
+            'Automaticaly maps to URLs using Routers',
+            'Provides more functionality with less code',
+        ]
+
+        return Response({'message': 'Viewset', 'a_viewset': a_viewset })
+
+
+
+
 # Create your views here.
 
 class HelloApiView(APIView):
