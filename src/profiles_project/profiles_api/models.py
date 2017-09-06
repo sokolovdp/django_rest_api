@@ -3,6 +3,15 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 
 # Create your models here.
+class ProfileFeedItem(models.Model):
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    status_text = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return status_text + " : " + str(created_on)
+
+
 class UserProfileManager(BaseUserManager):
     """ Helps Django to work with our UserModel """
 
