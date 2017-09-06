@@ -5,8 +5,20 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from profiles_api import serializers, models, permissions
+
+
+
+class UserProfileFeedViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.ProfileFeedItemSerializer
+    queryset = models.ProfileFeedItem.objects.all()
+    permission_classes = (permissions.PostOwnStatus, IsAuthenticated, )
+
+    def perform_create(self, serializer):
+        serializer.save(user_profile=self.request.user)
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
@@ -17,7 +29,6 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter, )
     search_fields = ('name', 'email',)
 
-    
 
 class LoginViewSet(viewsets.ViewSet):
     serializer_class = AuthTokenSerializer

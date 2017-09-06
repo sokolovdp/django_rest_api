@@ -9,7 +9,7 @@ class ProfileFeedItem(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return status_text + " : " + str(created_on)
+        return self.status_text + " : " + str(self.created_on)
 
 
 class UserProfileManager(BaseUserManager):
